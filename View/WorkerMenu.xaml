@@ -1,0 +1,18 @@
+﻿<Window x:Class="MVP_Hotel.View.WorkerMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MVP_Hotel.View"
+        mc:Ignorable="d"
+        Title="Menu" Height="350" Width="350"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
+    <StackPanel>
+        <Label x:Name="label" Content="You're logged in!" HorizontalAlignment="Center" Margin="20" Height="80" Width="350" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="36"/>
+        <Button x:Name="viewRooms" Content="View rooms" Height="75" Width="280" FontSize="20"
+                Click="ViewRoomsClick"/>
+        <Button x:Name="editReservations" Content="Edit reservations" Height="75" Width="280" FontSize="20"
+                Click="EditServicesClick"/>
+    </StackPanel>
+</Window>

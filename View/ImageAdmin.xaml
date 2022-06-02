@@ -1,0 +1,99 @@
+﻿<Window x:Class="MVP_Hotel.View.ImageAdmin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MVP_Hotel.View"
+        xmlns:context="clr-namespace:MVP_Hotel.ViewModel"
+        mc:Ignorable="d"
+        xmlns:convert="clr-namespace:MVP_Hotel.Converters"
+        Title="Images" 
+        Height="685" 
+        Width="455"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen" 
+        VerticalAlignment="Stretch">
+    <Window.DataContext>
+        <context:ImageAdminVM/>
+    </Window.DataContext>
+    <Window.Resources>
+        <BitmapImage x:Key="DefaultImage" 
+                     UriSource="/Images/noImage.jpg" />
+    </Window.Resources>
+    <StackPanel HorizontalAlignment="Center" 
+                VerticalAlignment="Top" 
+                Height="665">
+        <StackPanel.Resources>
+            <convert:ImageConvert x:Key="imageConvert"/>
+        </StackPanel.Resources>
+        <WrapPanel>
+            <Button Content="Add" 
+                    Margin="15" 
+                    Width="100" 
+                    Height="30" 
+                    Command="{Binding AddCommand}">
+                <Button.CommandParameter>
+                    <MultiBinding Converter="{StaticResource imageConvert}">
+                        <Binding ElementName="txtRoomID"
+                                 Path="Text"/>
+                        <Binding ElementName="txtPath" 
+                                 Path="Text"/>
+                    </MultiBinding>
+                </Button.CommandParameter>
+            </Button>
+            <Button Content="Modify" 
+                    Margin="15" 
+                    Width="100" 
+                    Height="30" 
+                    Command="{Binding UpdateCommand}"
+                    CommandParameter="{Binding ElementName=imageGrid, Path=SelectedItem}"/>
+            <Button Content="Delete" 
+                    Margin="15" 
+                    Width="100" 
+                    Height="30" 
+                    Command="{Binding DeleteCommand}"
+                    CommandParameter="{Binding ElementName=imageGrid, Path=SelectedItem}"/>
+        </WrapPanel>
+        <WrapPanel Margin="0,15,0,0">
+            <Label Width="150" 
+                   FontSize="15">Room number:</Label>
+            <TextBox Name="txtRoomID" 
+                     Width="200" 
+                     Text ="{Binding ElementName=imageGrid, Path=SelectedItem.Room_ID, UpdateSourceTrigger=PropertyChanged}"/>
+        </WrapPanel>
+        <WrapPanel Margin="0,15,0,0">
+            <Label Width="150" 
+                   FontSize="15">Path:</Label>
+            <TextBox Name="txtPath" 
+                     IsReadOnly = "True" 
+                     Width="160" 
+                     Text ="{Binding ElementName=imageGrid, Path=SelectedItem.Path, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Content="..."
+                    Click="BrowseButton_Click"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Width="40"
+                    Height="30"
+                    FontSize="14"/>
+        </WrapPanel>
+        <Image Height="200" 
+               Width="200" 
+               Margin="0,20,0,0"
+               Source ="{Binding ElementName=imageGrid, Path=SelectedItem.Path, UpdateSourceTrigger=PropertyChanged, FallbackValue={StaticResource DefaultImage}}"/>
+        <DataGrid Name="imageGrid" 
+                  AutoGenerateColumns="False" 
+                  Margin="0,15,0,0" 
+                  Height="250"
+                  ItemsSource="{Binding ImageList}" 
+                  IsReadOnly="True" 
+                  ScrollViewer.VerticalScrollBarVisibility="Visible" 
+                  VerticalAlignment="Bottom">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Room number" 
+                                    Binding="{Binding Room_ID}"/>
+                <DataGridTextColumn Header="Path" 
+                                    Binding="{Binding Path}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </StackPanel>
+</Window>

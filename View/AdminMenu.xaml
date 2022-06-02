@@ -1,0 +1,38 @@
+﻿<Window x:Class="MVP_Hotel.View.AdminMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Menu" 
+        Height="400" 
+        Width="350"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
+    <StackPanel>
+        <Label x:Name="label" 
+               Content="You're logged in!" 
+               HorizontalAlignment="Center" 
+               Margin="20" 
+               Height="80" 
+               Width="350" 
+               HorizontalContentAlignment="Center" 
+               VerticalContentAlignment="Center" 
+               FontSize="36"/>
+        <Button x:Name="editRooms" 
+                Content="Edit rooms" 
+                Height="75" 
+                Width="280" 
+                FontSize="20"
+                Click="EditRoomsClick"/>
+        <Button x:Name="editServices" 
+                Content="Edit services" 
+                Height="75" 
+                Width="280" 
+                FontSize="20"
+                Click="EditServicesClick"/>
+        <Button x:Name="editImages" 
+                Content="Edit images" 
+                Height="75" 
+                Width="280" 
+                FontSize="20"
+                Click="EditImagesClick"/>
+    </StackPanel>
+</Window>
